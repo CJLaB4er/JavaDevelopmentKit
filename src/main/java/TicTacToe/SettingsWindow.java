@@ -12,17 +12,39 @@ public class SettingsWindow extends JFrame {
     JButton btnStart = new JButton("Start new game");
 
     JPanel settingsPanel;
-    JRadioButtonMenuItem radioBtnGroup;
+    JPanel radioBtnPanel;
+    ButtonGroup radioBtnGroup;
+    JRadioButton HumanVsHuman;
+    JRadioButton HumanVsAi;
+    JSlider sizeMapSlider;
+    JSlider winLenghtSlider;
 
     SettingsWindow(GameWindow gameWindow) {
         setLocationRelativeTo(gameWindow);
-        setLocation(0,0);
+        setLocation(0, 0);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        settingsPanel = new JPanel(new GridLayout(9,1));
-        radioBtnGroup = new JRadioButtonMenuItem();
+        settingsPanel = new JPanel(new GridLayout(8, 1));
+        radioBtnPanel = new JPanel(new GridLayout(1, 2));
 
-        settingsPanel.add(new JLabel("Выберите режим игры:"));
+        radioBtnGroup = new ButtonGroup();
+        HumanVsHuman = new JRadioButton("Игрок vs Игрок");
+        HumanVsAi = new JRadioButton("Игрок vs AI");
+        radioBtnGroup.add(HumanVsHuman);
+        radioBtnGroup.add(HumanVsAi);
+        radioBtnPanel.add(HumanVsHuman);
+        radioBtnPanel.add(HumanVsAi);
+
+        sizeMapSlider = new JSlider(3, 10);
+        winLenghtSlider = new JSlider(3, 10);
+
+        settingsPanel.add(new JLabel("Выберите режим игры:", SwingConstants.CENTER));
+        settingsPanel.add(radioBtnPanel);
+        settingsPanel.add(new JLabel("Выберите размер поля:", SwingConstants.CENTER));
+        settingsPanel.add(sizeMapSlider);
+        settingsPanel.add(new JLabel("Выберите длину для победы:", SwingConstants.CENTER));
+        settingsPanel.add(new JLabel("Установленная длина: ", SwingConstants.CENTER));
+        settingsPanel.add(winLenghtSlider);
         settingsPanel.add(btnStart);
         add(settingsPanel);
 
