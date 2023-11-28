@@ -96,17 +96,17 @@ public class Map extends JPanel {
 
         panelWidth = getWidth();
         panelHeight = getHeight();
-        cellHeight = panelHeight / 3;
-        cellWidht = panelWidth / 3;
+        cellHeight = panelHeight / fieldSizeY;
+        cellWidht = panelWidth / fieldSizeX;
 
         g.setColor(Color.BLACK);
 
-        for (int h = 1; h < 3; h++) {
+        for (int h = 1; h < fieldSizeY; h++) {
             int y = h * cellHeight;
             g.drawLine(0, y, panelWidth, y);
         }
 
-        for (int w = 1; w < 3; w++) {
+        for (int w = 1; w < fieldSizeX; w++) {
             int x = w * cellWidht;
             g.drawLine(x, 0, x, panelHeight);
         }
@@ -159,9 +159,10 @@ public class Map extends JPanel {
     }
 
     void startNewGame(int mode, int fSzX, int fSzY, int wLen) {
-        System.out.println("Ok");
+        fieldSizeX = fSzX;
+        fieldSizeY = fSzY;
 
-        System.out.printf("Mode: %d;\nSize: x=%d, y=%d;\nWin Lenght: %d",
+        System.out.printf("Mode: %d;\nSize: x=%d, y=%d;\nWin Lenght: %d\n",
                 mode, fSzX, fSzY, wLen);
 
         initMap();
@@ -176,8 +177,6 @@ public class Map extends JPanel {
      * TicTacToe logic
      */
     private void initMap() {
-        fieldSizeX = 3;
-        fieldSizeY = 3;
         field = new char[fieldSizeY][fieldSizeX];
 
         for (int i = 0; i < fieldSizeY; i++) {

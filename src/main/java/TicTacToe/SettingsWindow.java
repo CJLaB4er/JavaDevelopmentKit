@@ -16,8 +16,8 @@ public class SettingsWindow extends JFrame {
     JPanel settingsPanel;
     JPanel radioBtnPanel;
     ButtonGroup radioBtnGroup;
-    JRadioButton HumanVsHuman;
-    JRadioButton HumanVsAi;
+    JRadioButton humanVsHuman;
+    JRadioButton humanVsAi;
     JSlider sizeMapSlider;
     JSlider winLenghtSlider;
     JLabel sizeMapLbl;
@@ -32,12 +32,13 @@ public class SettingsWindow extends JFrame {
         radioBtnPanel = new JPanel(new GridLayout(1, 2));
 
         radioBtnGroup = new ButtonGroup();
-        HumanVsHuman = new JRadioButton("Игрок vs Игрок");
-        HumanVsAi = new JRadioButton("Игрок vs AI");
-        radioBtnGroup.add(HumanVsHuman);
-        radioBtnGroup.add(HumanVsAi);
-        radioBtnPanel.add(HumanVsHuman);
-        radioBtnPanel.add(HumanVsAi);
+        humanVsHuman = new JRadioButton("Игрок vs Игрок");
+        humanVsAi = new JRadioButton("Игрок vs AI");
+        humanVsAi.setSelected(true);
+        radioBtnGroup.add(humanVsAi);
+        radioBtnGroup.add(humanVsHuman);
+        radioBtnPanel.add(humanVsAi);
+        radioBtnPanel.add(humanVsHuman);
 
         sizeMapSlider = new JSlider(3, 10, 3);
         sizeMapSlider.addChangeListener(new ChangeListener() {
@@ -70,7 +71,11 @@ public class SettingsWindow extends JFrame {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameWindow.startNewGame(0, 3, 3, 3);
+                gameWindow.startNewGame(
+                        humanVsAi.isSelected() ? 0 : 1,
+                        sizeMapSlider.getValue(),
+                        sizeMapSlider.getValue(),
+                        winLenghtSlider.getValue());
                 setVisible(false);
             }
         });
