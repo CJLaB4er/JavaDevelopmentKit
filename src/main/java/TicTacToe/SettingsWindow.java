@@ -1,6 +1,8 @@
 package TicTacToe;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,13 +20,15 @@ public class SettingsWindow extends JFrame {
     JRadioButton HumanVsAi;
     JSlider sizeMapSlider;
     JSlider winLenghtSlider;
+    JLabel sizeMapLbl;
+    JLabel winLenghtLbl;
 
     SettingsWindow(GameWindow gameWindow) {
         setLocationRelativeTo(gameWindow);
-        setLocation(0, 0);
+        setLocation(gameWindow.getX() + gameWindow.getWidth() / 2, gameWindow.getY() + gameWindow.getHeight() / 2);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        settingsPanel = new JPanel(new GridLayout(8, 1));
+        settingsPanel = new JPanel(new GridLayout(7, 1));
         radioBtnPanel = new JPanel(new GridLayout(1, 2));
 
         radioBtnGroup = new ButtonGroup();
@@ -35,15 +39,30 @@ public class SettingsWindow extends JFrame {
         radioBtnPanel.add(HumanVsHuman);
         radioBtnPanel.add(HumanVsAi);
 
-        sizeMapSlider = new JSlider(3, 10);
-        winLenghtSlider = new JSlider(3, 10);
+        sizeMapSlider = new JSlider(3, 10, 3);
+        sizeMapSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                sizeMapLbl.setText("Выберите размер поля: " + sizeMapSlider.getValue());
+
+            }
+        });
+
+        winLenghtSlider = new JSlider(3, 10, 3);
+        winLenghtSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                winLenghtLbl.setText("Выберите длину для победы: " + winLenghtSlider.getValue());
+            }
+        });
 
         settingsPanel.add(new JLabel("Выберите режим игры:", SwingConstants.CENTER));
         settingsPanel.add(radioBtnPanel);
-        settingsPanel.add(new JLabel("Выберите размер поля:", SwingConstants.CENTER));
+        sizeMapLbl = new JLabel("Выберите размер поля: " + sizeMapSlider.getValue(), SwingConstants.CENTER);
+        settingsPanel.add(sizeMapLbl);
         settingsPanel.add(sizeMapSlider);
-        settingsPanel.add(new JLabel("Выберите длину для победы:", SwingConstants.CENTER));
-        settingsPanel.add(new JLabel("Установленная длина: ", SwingConstants.CENTER));
+        winLenghtLbl = new JLabel("Выберите длину для победы: " + winLenghtSlider.getValue(), SwingConstants.CENTER);
+        settingsPanel.add(winLenghtLbl);
         settingsPanel.add(winLenghtSlider);
         settingsPanel.add(btnStart);
         add(settingsPanel);
