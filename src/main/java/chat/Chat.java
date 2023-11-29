@@ -76,6 +76,8 @@ public class Chat extends JFrame {
 //        Размещение текстового окна с историей сообщений
         textArea = new JTextArea();
         textArea.setEnabled(false);
+        textArea.setDisabledTextColor(Color.BLACK);
+        textArea.setFont(new Font("Arial", Font.BOLD, 18));
 
 //        Компонока южной панели
         messageTextField = new JTextField();
@@ -88,7 +90,7 @@ public class Chat extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendMessage();
                 }
 
@@ -126,7 +128,7 @@ public class Chat extends JFrame {
         new Chat();
     }
 
-    private void sendMessage(){
+    private void sendMessage() {
         textArea.append(login + ": " + messageTextField.getText() + "\n");
         messageTextField.setText("");
     }
