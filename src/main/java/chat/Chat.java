@@ -12,6 +12,8 @@ public class Chat extends JFrame {
     private static final int WINDOW_WIDTH = 507;
     private static final int WINDOW_POSX = 800;
     private static final int WINDOW_POSY = 300;
+    boolean isConnected = false;
+    String login;
     JPanel northPanel, southPanel, loginPassPanel, ipPortPanel;
     JLabel loginLabel, passLabel, ipLabel, portLabel;
     JTextField loginTextField, ipTextField, portTextField, messageTextField;
@@ -31,7 +33,7 @@ public class Chat extends JFrame {
 
 //        Размещение элементов login / password
         loginLabel = new JLabel("Login:", SwingConstants.CENTER);
-        loginTextField = new JTextField("Введите логин");
+        loginTextField = new JTextField("User");
         passLabel = new JLabel("Password:", SwingConstants.CENTER);
         passTextField = new JPasswordField();
 
@@ -55,6 +57,14 @@ public class Chat extends JFrame {
 
 //        Размещение кнопки connect
         connectBtn = new JButton("Connect");
+        connectBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                login = loginTextField.getText();
+                isConnected = true;
+                messageTextField.setEnabled(true);
+            }
+        });
 
 
 //        Компоновка верхней панели
@@ -69,6 +79,7 @@ public class Chat extends JFrame {
 
 //        Компонока южной панели
         messageTextField = new JTextField();
+        messageTextField.setEnabled(false);
         messageTextField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -107,6 +118,7 @@ public class Chat extends JFrame {
         add(textArea, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
 
+
         setVisible(true);
     }
 
@@ -115,7 +127,7 @@ public class Chat extends JFrame {
     }
 
     private void sendMessage(){
-        textArea.append(messageTextField.getText() + "\n");
+        textArea.append(login + ": " + messageTextField.getText() + "\n");
         messageTextField.setText("");
     }
 }
