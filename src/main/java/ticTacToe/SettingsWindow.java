@@ -1,4 +1,4 @@
-package TicTacToe;
+package ticTacToe;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

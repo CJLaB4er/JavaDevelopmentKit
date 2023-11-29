@@ -1,4 +1,4 @@
-package TicTacToe;
+package ticTacToe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class GameWindow extends JFrame {
 
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        setTitle("TicTacToe");
+        setTitle("ticTacToe");
         setResizable(false);
 
         map = new Map();
