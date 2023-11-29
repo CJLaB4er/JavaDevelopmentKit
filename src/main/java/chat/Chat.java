@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Chat extends JFrame {
     private static final int WINDOW_HEIGHT = 555;
@@ -67,13 +69,31 @@ public class Chat extends JFrame {
 
 //        Компонока южной панели
         messageTextField = new JTextField();
+        messageTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    sendMessage();
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         sendBtn = new JButton("Send");
         sendBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textArea.append(messageTextField.getText() + "\n");
-                messageTextField.setText("");
+                sendMessage();
             }
         });
 
@@ -92,6 +112,11 @@ public class Chat extends JFrame {
 
     public static void main(String[] args) {
         new Chat();
+    }
+
+    private void sendMessage(){
+        textArea.append(messageTextField.getText() + "\n");
+        messageTextField.setText("");
     }
 }
 
