@@ -2,6 +2,8 @@ package chat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Chat extends JFrame {
     private static final int WINDOW_HEIGHT = 555;
@@ -12,7 +14,7 @@ public class Chat extends JFrame {
     JLabel loginLabel, passLabel, ipLabel, portLabel;
     JTextField loginTextField, ipTextField, portTextField, messageTextField;
     JPasswordField passTextField;
-    JButton connect, sendBtn;
+    JButton connectBtn, sendBtn;
     JTextArea textArea;
 
 
@@ -50,13 +52,14 @@ public class Chat extends JFrame {
         ipPortPanel.add(portTextField);
 
 //        Размещение кнопки connect
-        connect = new JButton("Connect");
+        connectBtn = new JButton("Connect");
+
 
 //        Компоновка верхней панели
         northPanel = new JPanel(new GridLayout(3, 1));
         northPanel.add(loginPassPanel);
         northPanel.add(ipPortPanel);
-        northPanel.add(connect);
+        northPanel.add(connectBtn);
 
 //        Размещение текстового окна с историей сообщений
         textArea = new JTextArea();
@@ -64,9 +67,17 @@ public class Chat extends JFrame {
 
 //        Компонока южной панели
         messageTextField = new JTextField();
-        sendBtn = new JButton("Send");
 
-        southPanel = new JPanel(new GridLayout(1,2));
+        sendBtn = new JButton("Send");
+        sendBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.append(messageTextField.getText() + "\n");
+                messageTextField.setText("");
+            }
+        });
+
+        southPanel = new JPanel(new GridLayout(1, 2));
         southPanel.add(messageTextField);
         southPanel.add(sendBtn);
 
