@@ -2,10 +2,9 @@ package chat;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Chat extends JFrame {
     private static final int WINDOW_HEIGHT = 555;
@@ -23,7 +22,16 @@ public class Chat extends JFrame {
 
 
     Chat() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeChat();
+                System.out.println("История чата сохранена!");
+//                super.windowClosing(e);
+                e.getWindow().dispose();
+            }
+        });
 
         setTitle("Chat");
 
@@ -93,7 +101,6 @@ public class Chat extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendMessage();
                 }
-
             }
 
             @Override
@@ -131,6 +138,18 @@ public class Chat extends JFrame {
     private void sendMessage() {
         textArea.append(login + ": " + messageTextField.getText() + "\n");
         messageTextField.setText("");
+    }
+
+    private void closeChat() {
+        try (FileWriter writer = new FileWriter("src/main/java/chat/log", true)) {
+            String log = textArea.getText();
+            writer.write(log);
+            writer.flush();
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
     }
 }
 
