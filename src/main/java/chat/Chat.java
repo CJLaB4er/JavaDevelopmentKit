@@ -3,6 +3,8 @@ package chat;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ public class Chat extends JFrame {
     private static final int WINDOW_POSX = 800;
     private static final int WINDOW_POSY = 300;
     boolean isConnected = false;
+    String fileNameLog = "src/main/java/chat/log";
     String login;
     JPanel northPanel, southPanel, loginPassPanel, ipPortPanel;
     JLabel loginLabel, passLabel, ipLabel, portLabel;
@@ -71,6 +74,20 @@ public class Chat extends JFrame {
                 login = loginTextField.getText();
                 isConnected = true;
                 messageTextField.setEnabled(true);
+
+                try (FileReader fileReader = new FileReader(fileNameLog)) {
+                    StringBuilder log = new StringBuilder();
+                    int c;
+                    while ((c = fileReader.read()) != -1) {
+
+                        log.append((char) c);
+                    }
+                    textArea.setText(log.toString());
+                } catch (IOException ex) {
+
+                    System.out.println(ex.getMessage());
+
+                }
             }
         });
 
@@ -141,7 +158,7 @@ public class Chat extends JFrame {
     }
 
     private void closeChat() {
-        try (FileWriter writer = new FileWriter("src/main/java/chat/log", true)) {
+        try (FileWriter writer = new FileWriter(fileNameLog, false)) {
             String log = textArea.getText();
             writer.write(log);
             writer.flush();
