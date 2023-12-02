@@ -19,7 +19,7 @@ public class Main {
         }
     }
 
-    private static void addMouseListener(MouseListener l) {
+    public static void addMouseListener(MouseListener l) {
         l.mouseDown();
         l.mouseUp();
     }

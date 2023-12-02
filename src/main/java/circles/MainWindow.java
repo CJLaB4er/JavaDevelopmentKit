@@ -1,13 +1,18 @@
 package circles;
 
+
 import common.CanvasRepaintListener;
 import common.Interactable;
 import common.MainCanvas;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class MainWindow extends JFrame implements CanvasRepaintListener {
+
+public class MainWindow extends JFrame implements CanvasRepaintListener, MouseListener {
     public static final int POS_X = 400;
     public static final int POS_Y = 200;
     public static final int WINDOW_WIDTH = 800;
@@ -23,6 +28,12 @@ public class MainWindow extends JFrame implements CanvasRepaintListener {
         }
 
         MainCanvas canvas = new MainCanvas(this);
+        canvas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
         add(canvas);
 
         setVisible(true);
@@ -50,5 +61,30 @@ public class MainWindow extends JFrame implements CanvasRepaintListener {
 
     public static void main(String[] args) {
         new MainWindow();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("Клик мышкой");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
