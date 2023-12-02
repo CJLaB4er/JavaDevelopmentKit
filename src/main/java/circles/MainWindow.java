@@ -1,5 +1,8 @@
 package circles;
 
+import common.Interactable;
+import common.MainCanvas;
+
 import javax.swing.*;
 import java.awt.*;
 

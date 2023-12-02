@@ -1,8 +1,8 @@
-package circles;
+package common;
 
 import java.awt.*;
 
-public abstract class Sprite implements Interactable{
+public abstract class Sprite implements Interactable {
     protected float x, y, halfWidth, halfHeight;
 
     protected float getLeft() {

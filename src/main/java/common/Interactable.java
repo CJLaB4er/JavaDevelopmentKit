@@ -1,4 +1,4 @@
-package circles;
+package common;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package circles.interfaces;
+package interfaces;
 
 public class Ox implements Bull{
     @Override

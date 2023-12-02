@@ -1,4 +1,4 @@
-package circles.interfaces;
+package interfaces;
 
 public class Man implements Human{
     @Override

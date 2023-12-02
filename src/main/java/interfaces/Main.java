@@ -1,4 +1,4 @@
-package circles.interfaces;
+package interfaces;
 
 public class Main {
     private static class Minotaurus implements Human, Bull {

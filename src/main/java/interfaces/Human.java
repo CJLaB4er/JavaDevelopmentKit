@@ -1,4 +1,4 @@
-package circles.interfaces;
+package interfaces;
 
 public interface Human {
     public void walk();

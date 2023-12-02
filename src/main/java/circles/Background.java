@@ -1,5 +1,8 @@
 package circles;
 
+import common.MainCanvas;
+import common.Sprite;
+
 import java.awt.*;
 
 public class Background extends Sprite {

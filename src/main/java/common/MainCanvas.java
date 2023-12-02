@@ -1,4 +1,7 @@
-package circles;
+package common;
+
+import circles.Background;
+import circles.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +11,7 @@ public class MainCanvas extends JPanel {
     private final Background background;
     private long lastFrameTime;
 
-    MainCanvas(MainWindow controller) {
+    public MainCanvas(MainWindow controller) {
 //        setBackground(Color.BLUE);
         background = new Background();
         this.controller = controller;

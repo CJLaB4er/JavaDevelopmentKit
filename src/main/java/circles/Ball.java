@@ -1,9 +1,12 @@
 package circles;
 
+import common.MainCanvas;
+import common.Sprite;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Ball extends Sprite{
+public class Ball extends Sprite {
     private static Random random = new Random();
     private final Color color;
     private float vX, vY;

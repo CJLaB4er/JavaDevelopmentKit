@@ -1,4 +1,4 @@
-package circles.interfaces;
+package interfaces;
 
 public interface Bull {
     void walk();
