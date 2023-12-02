@@ -7,11 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainCanvas extends JPanel {
-    private final MainWindow controller;
+    private final CanvasRepaintListener controller;
     private final Background background;
     private long lastFrameTime;
 
-    public MainCanvas(MainWindow controller) {
+    public MainCanvas(CanvasRepaintListener controller) {
 //        setBackground(Color.BLUE);
         background = new Background();
         this.controller = controller;

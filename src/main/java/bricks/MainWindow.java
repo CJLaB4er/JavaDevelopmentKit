@@ -1,5 +1,6 @@
-package circles;
+package bricks;
 
+import circles.Ball;
 import common.CanvasRepaintListener;
 import common.Interactable;
 import common.MainCanvas;
@@ -17,9 +18,9 @@ public class MainWindow extends JFrame implements CanvasRepaintListener {
     private MainWindow() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(POS_X, POS_Y, WINDOW_WIDTH, WINDOW_HEIGT);
-        setTitle("Circles");
+        setTitle("Bricks");
         for (int i = 0; i < interactables.length; i++) {
-            interactables[i] = new Ball();
+            interactables[i] = new Brick();
         }
 
         MainCanvas canvas = new MainCanvas(this);
@@ -28,7 +29,6 @@ public class MainWindow extends JFrame implements CanvasRepaintListener {
         setVisible(true);
     }
 
-    @Override
     public void onDrawFrame(MainCanvas canvas, Graphics g, float deltaTime) {
         update(canvas, deltaTime);
         render(canvas, g);
