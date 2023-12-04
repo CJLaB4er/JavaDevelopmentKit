@@ -5,18 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ServerStartStop extends JFrame {
+public class ServerStartStop extends JFrame implements Listener {
     JButton startServerBtn = new JButton("Start server");
     JButton stopServerBtn = new JButton("Stop server");
-    boolean serverWorking = false;
     JPanel startStopBtnPanel;
+    JLabel logLabel;
+    Server server;
 
     ServerStartStop() {
+        server = new Server(this);
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLocationRelativeTo(null);
 
-        setSize(800, 400);
+        setSize(400, 200);
 
         setTitle("Управление сервером");
         setResizable(false);
@@ -24,32 +27,33 @@ public class ServerStartStop extends JFrame {
         startStopBtnPanel = new JPanel(new GridLayout(1, 2));
         startStopBtnPanel.add(startServerBtn);
         startStopBtnPanel.add(stopServerBtn);
-        add(startStopBtnPanel);
+        add(startStopBtnPanel, BorderLayout.CENTER);
+
+        logLabel = new JLabel("Server down", SwingConstants.CENTER);
+        add(logLabel, BorderLayout.SOUTH);
+
+        setVisible(true);
 
         startServerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!serverWorking) {
-                    serverWorking = true;
-                    System.out.println("Сервер запущен");
-                }else System.out.println("Сервер уже запущен");
+                server.start();
             }
         });
-
         stopServerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (serverWorking) {
-                    serverWorking = false;
-                    System.out.println("Сервер остановлен");
-                } else System.out.println("Сервер уже был остановлен ранее");
+                server.stop();
             }
         });
-
-        setVisible(true);
     }
 
     public static void main(String[] args) {
         new ServerStartStop();
+    }
+
+    @Override
+    public void messageRes(String text) {
+        logLabel.setText(text);
     }
 }
