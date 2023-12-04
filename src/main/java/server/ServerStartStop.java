@@ -10,10 +10,10 @@ public class ServerStartStop extends JFrame implements Listener {
     JButton stopServerBtn = new JButton("Stop server");
     JPanel startStopBtnPanel;
     JLabel logLabel;
-    Server server;
+    ListenerBtn btnListener;
 
     ServerStartStop() {
-        server = new Server(this);
+        btnListener = new Server(this);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -36,14 +36,13 @@ public class ServerStartStop extends JFrame implements Listener {
 
         startServerBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                server.start();
+            public void actionPerformed(ActionEvent e) {btnListener.btnListen(true);
             }
         });
         stopServerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                server.stop();
+                btnListener.btnListen(false);
             }
         });
     }
