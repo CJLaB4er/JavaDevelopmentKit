@@ -1,12 +1,14 @@
 package coollections;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
 //		task1();
 //		task2();
-		task3();
+//		task3();
+		homeWork();
 	}
 
 	private static void task1() {
@@ -127,5 +129,29 @@ public class Main {
 				.findAny()
 				.get()
 				.getKey());
+	}
+
+	private static void homeWork() {
+		EmployeeDirectory employees = new EmployeeDirectory();
+
+		employees.add(new Employee("146548", "Ivan", LocalDate.of(2021, 1, 1)));
+		employees.add(new Employee("123414", "Ivan", LocalDate.of(2020, 3, 14)));
+		employees.add(new Employee("123145", "Oleg", LocalDate.of(2014, 7, 14)));
+		employees.add(new Employee("352513", "Viktor"));
+		employees.add(new Employee("111333", "Oleg"));
+
+
+		System.out.println("Поиск сотрудников по имени");
+		employees.searchForName("Ivan");
+
+		System.out.println("Поиск сотрудников по стажу, не мнее полных лет");
+		employees.searchForExperience(3);
+
+		System.out.println("Поиск номера телефона по имени сотрудника");
+		employees.phoneNumberForName("Oleg");
+
+		System.out.println("Поиск сотрудника по id");
+		employees.idSearch(3);
+
 	}
 }
